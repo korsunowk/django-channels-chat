@@ -38,6 +38,7 @@ class UserCreateView(generic.CreateView):
 
 class MessageCreateView(LoginRequiredMixin, generic.CreateView):
     model = Message
+    fields = ['text', 'chat', 'sender']
 
     def post(self, request, *args, **kwargs):
         message = request.POST.get('message', None)
@@ -56,7 +57,6 @@ class MessageCreateView(LoginRequiredMixin, generic.CreateView):
                 "text": json.dumps({
                     "recipient_message": recipient_message,
                     "sender_message": sender_message,
-                    "recipient": new_message.chat.recipients.all().exclude(pk=new_message.sender.pk).first().pk,
                     "sender": self.request.user.pk
                 })
             })

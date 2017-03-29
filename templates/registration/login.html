@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container-fluid site-wrapper">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <form action="." method="post">
+
+            {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+
+            {% if next %}
+                {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+                {% else %}
+                <p>Please login to see this page.</p>
+                {% endif %}
+            {% endif %}
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">{{ form.non_field_errors|join:"<br \>" }}</div>
+            {% endif %}
+
+            <input type="hidden" name="next" value="{{ next }}" />
+
+
+            {% for field in form %}
+                <div class="form-group {% if field.errors %}has-error{% endif %}">
+                {{ field.label_tag }}
+                {% if field.help_text %}
+                <span class="help-block">{{ field.help_text }}</span>
+                {% endif %}
+                {% if field.errors %}
+                <span class="help-block">{{ field.errors|join:"<br \>" }}</span>
+                {% endif %}
+                {{ field }}
+                </div>
+            {% endfor %}
+
+            {% csrf_token %}
+
+            <div class="form-group">
+              <button class="btn btn-lg btn-default btn-primary">Go chatting</button>
+            </div>
+          </form>
+            <div class="form-group">
+              <a href="{% url 'chat:registration' %}">Registration</a>
+            </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

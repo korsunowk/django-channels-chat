@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="{% static 'css.css' %}">
+    <script type="text/javascript" src="{% static 'js/js.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/reconnecting-websocket.min.js' %}"></script>
+</head>
+<body>
+    <div class="header">
+        <span class="username">Hello, {{ request.user.username }}!</span>
+        <a href="{% url 'logout' %}?next=/" class="logout">Logout</a>
+    </div>
+    <div class="messenger_conversation-start">
+        Welcome to global chat!
+    </div>
+    <div class="messenger" data-update="{% url 'chat:typing' %}" data-user="{{ request.user.pk }}">
+        <div class="messages__wrapper">
+            <div class="messenger__messages">
+                <div class="messenger__older-messages-toggle">
+                    {% if messages %}
+                        {% for message in messages %}
+                                {% if message.sender == request.user %}
+                                    {% include 'partials/my-message-html.html' with message=message %}
+                                {% else %}
+                                    {% include 'partials/other-message-html.html' with message=message %}
+                                {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <div class="status--commenting hidden">
+                        <span class="typing-username"></span><span> is typing message...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="messenger__input">
+            {% csrf_token %}
+            <div class="messenger__submit-block">
+                <textarea name="text"></textarea>
+                <button class="send_message"
+                        data-sender="{{ request.user.pk }}"
+                        data-url="{% url 'chat:create' %}"
+                >Send message</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+
+    </div>
+</body>
+</html>

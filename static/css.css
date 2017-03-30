@@ -1,7 +1,7 @@
 
 .status--commenting {
     opacity: 0;
-    position: absolute;
+    position: relative;
     bottom: 0;
 }
 
@@ -107,4 +107,8 @@ textarea:focus {
     background: lightblue;
     border: 2px solid black;
     font-size: 18px;
+}
+
+.messenger__older-messages-toggle p:last-child {
+    /*margin-bottom: 15px;*/
 }

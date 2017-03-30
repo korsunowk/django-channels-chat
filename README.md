@@ -6,3 +6,8 @@
 - Django 1.10.6
 - channels 1.1.1
 - ReconnectingWebSockets (js-библиотека, которая входит в статику проекта).
+
+Порядок запуска:
+- создание виртуального окружения
+- python manage.py migrate
+- python manage.py runserver ...

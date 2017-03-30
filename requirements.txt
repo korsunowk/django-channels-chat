@@ -1,2 +1,4 @@
 django==1.10.6
 channels==1.1.1
+# if windows OS
+# win32api

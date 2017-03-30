@@ -30,6 +30,7 @@ $(document).ready(function () {
             {
                 $(".status--commenting").find('.typing-username').html(data.username);
                 $(".status--commenting").addClass("visible");
+                $(".status--commenting").css({'bottom': 0}); // update absolute position in div with overflow
 
                 setTimeout(function () {
                     $(".status--commenting").removeClass("visible");

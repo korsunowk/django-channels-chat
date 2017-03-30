@@ -27,7 +27,7 @@
             {% if next %}
                 {% if user.is_authenticated %}
                     <p>Your account doesn't have access to this page. To proceed,
-                    please login with an account that has access.</p>
+                        please login with an account that has access.</p>
                 {% else %}
                     <p class="login_text">Please login to see this page.</p>
                 {% endif %}
@@ -56,7 +56,7 @@
 
             {% csrf_token %}
 
-              {% if form.errors %}
+            {% if form.errors %}
                 <div class="form-group has-error">
                     <span class="help-block help-text">Your username and password didn't match. Please try again.</span>
                 </div>

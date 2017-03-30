@@ -49,9 +49,9 @@ class MessageCreateView(LoginRequiredMixin, generic.CreateView):
                 sender=User.objects.get(pk=sender),
                 text=message
             )
-
-            recipient_message = render_to_string('partials/other-message-html.html', {'message': new_message})
-            sender_message = render_to_string('partials/my-message-html.html', {'message': new_message})
+            args = {'message': new_message}
+            recipient_message = render_to_string('partials/other-message-html.html', args)
+            sender_message = render_to_string('partials/my-message-html.html', args)
 
             Group("room").send({
                 "text": json.dumps({
@@ -61,7 +61,10 @@ class MessageCreateView(LoginRequiredMixin, generic.CreateView):
                 })
             })
 
-            return JsonResponse(dict(recipient_message=recipient_message, sender_message=sender_message))
+            return JsonResponse(
+                dict(recipient_message=recipient_message,
+                     sender_message=sender_message)
+            )
         return HttpResponse('')
 
 

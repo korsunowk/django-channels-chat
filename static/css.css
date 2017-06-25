@@ -108,7 +108,3 @@ textarea:focus {
     border: 2px solid black;
     font-size: 18px;
 }
-
-.messenger__older-messages-toggle p:last-child {
-    /*margin-bottom: 15px;*/
-}

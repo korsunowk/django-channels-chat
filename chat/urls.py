@@ -1,5 +1,5 @@
-from chat import views
 from django.conf.urls import url
+from chat import views
 
 app_name = 'chat'
 urlpatterns = [

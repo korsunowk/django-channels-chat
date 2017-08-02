@@ -14,7 +14,7 @@ function getCookie(name) {
          }
       }
   }
-return cookieValue;
+  return cookieValue;
 }
 
 var csrftoken = getCookie('csrftoken');
